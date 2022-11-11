@@ -15,7 +15,7 @@ app.get('/', (req, res) => {
 
   const file1 = './datasets/lighthouse.json';
 
-  const file2 = './datasets/markit.json';
+  const file2 = './datasets/newformattest.json';
 
   const results = extractor(file2);
 
@@ -32,9 +32,9 @@ function extractor(inputFile) {
 
   let output = {};
 
-  Object.entries(dataObject.categories).map(item => { // Iterate cateogories..
+  Object.entries(dataObject.data.lighthouseResult.categories).map(item => { // Iterate cateogories..
 
-    const reqURL = dataObject.requestedUrl;
+    const reqURL = dataObject.data.lighthouseResult.requestedUrl;
     const categoryTitle = item[1].title;
     const categogryScore = item[1].score;
     let metrics =  []
@@ -51,7 +51,7 @@ function extractor(inputFile) {
 
       const auditID = element.id;
 
-      Object.entries(dataObject.audits).map(item2 => {  // Iterate all metrics + results..
+      Object.entries(dataObject.data.lighthouseResult.audits).map(item2 => {  // Iterate all metrics + results..
         
         if (auditID === item2[1].id) {
 
